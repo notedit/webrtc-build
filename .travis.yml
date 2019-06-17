@@ -1,0 +1,30 @@
+branches:
+  only:
+  - master
+
+sudo: true
+
+language: c++
+
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode10.1
+
+
+before_install:
+  - git config branch.autosetupmerge always && git config branch.autosetuprebase always
+  - export PATH=$PATH:$(pwd)/depot_tools/
+  
+
+
+install:
+  - fetch --nohooks webrtc
+  - gclient sync
+  - gn gen out/Default
+  - ninja -C out/Default
+
+
+script:
+  - echo "webrtc"
