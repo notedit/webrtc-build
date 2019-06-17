@@ -38,7 +38,7 @@ script:
 
 deploy:
   provider: releases
-  api_key: dd389876208fbe846369a668b164063f909d8792
+  api_key: dde1b89276a85ac4370c8e6e7937b7e4df751cd8
   file_glob: true
   file: src/out/macos/release/*
   skip_cleanup: true
