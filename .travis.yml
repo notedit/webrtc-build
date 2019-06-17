@@ -23,6 +23,7 @@ install:
   - fetch --nohooks webrtc
   - sed -i -e "s|'src/resources'],|'src/resources'],'condition':'rtc_include_tests==true',|" src/DEPS
   - gclient sync
+  - cd ./src
   - gn gen out/Default --args="is_debug=false target_cpu=\"x64\" rtc_include_tests=false"
   - ninja -C out/Default
 
