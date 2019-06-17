@@ -1,23 +1,17 @@
 branches:
   only:
   - master
-
 sudo: true
-
 language: cpp
-
-
 matrix:
   include:
-    - os: osx
-      osx_image: xcode10.1
+  - os: osx
+    osx_image: xcode10.1
 
 
 before_install:
   - git config branch.autosetupmerge always && git config branch.autosetuprebase always
   - export PATH=$PATH:$(pwd)/depot_tools/
-
-
 
 install:
   - fetch --nohooks webrtc
@@ -28,18 +22,19 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ninja webrtc -C out/macos; fi
   - mkdir out/macos/release && mkdir out/macos/release/include && cp out/macos/obj/libwebrtc.a out/macos/release/ && find -name "*.h" | xargs cp --parents -t ./out/macos/release/include/
 
-
-
 script:
-  - echo "webrtc"
-
-
+- echo "webrtc"
 
 
 deploy:
   provider: releases
-  api_key: dde1b89276a85ac4370c8e6e7937b7e4df751cd8
+  api_key:
+    secure: ajXS1Nwh7JrQxybidrIIpn22m1OPtPuqnHhtGy1uJaLh7OqF7gD+bSCxjRlBUrVMwuymnGl8rBUrL7oyIwK5cG9mCUJJ9i9QCveyrYUlUIUeWMkuBXLNSV10aYzz4q2PjuaI8KwHGo6MJ1yMXhv7dn7/03vmFco7hjCgPS2G1lg8Nwc96ICwGVi4DLzD0Ysoj7qxwLv39I0eRJzC/xgN5e7lY955Lv/z/7GkAtNspJ/7ak3tGgQvBHB4cyqEpCJ1H8xAXMdlEdyal9gznWvcAW8084ZxdD8NDcaRAqWsNzSrdGZpQyDi8rnThDtpUkcyCI3HO9Cr4XY0bQhcW5tO5Dyb1qenIcF8dr/7oa7sjCBtlT9bnXYb6Um6jnwTP/OJc189T3FP3FXIVS9obKLH/e0qeiKe2qUkr9xYOa3VTKy1V4VbiVFYkWsNRTV1lqVLDv7w8X8kWvbJsyZ7T/n/DR2PZrq+9kogdx8jWnXF+Z7N5Y9QEZsA3cGAoDrW1rqViEEv0Qkj56EVrowzPYChThLUPJ5CsztfiYalYe1K04FperQjBYbwEgxXQGrA8FNhqQis1pE99RtxJjPrhgvHAVnFrOdWdqjsdVV22lJe56MPlPqvN00XHFADF8yBJ8ymxB5/qPQAQkXQT2+Gf0pvcIgzHnZEegOgIHq/zT+9iTc=
   file_glob: true
   file: src/out/macos/release/*
   skip_cleanup: true
   draft: true
+  on:
+    repo: notedit/webrtc-build
+
+    
