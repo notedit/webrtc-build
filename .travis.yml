@@ -22,6 +22,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then gn gen out/macos --args="is_debug=false target_cpu=\"x64\" rtc_include_tests=false"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ninja webrtc -C out/macos; fi
   - mkdir out/macos/release && mkdir out/macos/release/include && cp out/macos/obj/libwebrtc.a out/macos/release/ && find -name "*.h" | xargs cp --parents -t ./out/macos/release/include/
+  - tar -zcvf $BASEDIR/src/out/macos/release/include.tar.gz ./$BASEDIR/src/out/macos/release/include/
 
 script:
   - ls -al $BASEDIR/src/out/macos/release/
@@ -33,7 +34,7 @@ deploy:
   api_key:
     secure: ajXS1Nwh7JrQxybidrIIpn22m1OPtPuqnHhtGy1uJaLh7OqF7gD+bSCxjRlBUrVMwuymnGl8rBUrL7oyIwK5cG9mCUJJ9i9QCveyrYUlUIUeWMkuBXLNSV10aYzz4q2PjuaI8KwHGo6MJ1yMXhv7dn7/03vmFco7hjCgPS2G1lg8Nwc96ICwGVi4DLzD0Ysoj7qxwLv39I0eRJzC/xgN5e7lY955Lv/z/7GkAtNspJ/7ak3tGgQvBHB4cyqEpCJ1H8xAXMdlEdyal9gznWvcAW8084ZxdD8NDcaRAqWsNzSrdGZpQyDi8rnThDtpUkcyCI3HO9Cr4XY0bQhcW5tO5Dyb1qenIcF8dr/7oa7sjCBtlT9bnXYb6Um6jnwTP/OJc189T3FP3FXIVS9obKLH/e0qeiKe2qUkr9xYOa3VTKy1V4VbiVFYkWsNRTV1lqVLDv7w8X8kWvbJsyZ7T/n/DR2PZrq+9kogdx8jWnXF+Z7N5Y9QEZsA3cGAoDrW1rqViEEv0Qkj56EVrowzPYChThLUPJ5CsztfiYalYe1K04FperQjBYbwEgxXQGrA8FNhqQis1pE99RtxJjPrhgvHAVnFrOdWdqjsdVV22lJe56MPlPqvN00XHFADF8yBJ8ymxB5/qPQAQkXQT2+Gf0pvcIgzHnZEegOgIHq/zT+9iTc=
   file_glob: true
-  file: $BASEDIR/src/out/macos/release/*
+  file: $BASEDIR/src/out/macos/release/**/*
   skip_cleanup: true
   draft: true
   on:
