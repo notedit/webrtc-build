@@ -11,6 +11,7 @@ matrix:
 
 before_install:
   - git config branch.autosetupmerge always && git config branch.autosetuprebase always
+  - brew install coreutils
   - export PATH=$PATH:$(pwd)/depot_tools/
   - export BASEDIR=$(pwd)
 
@@ -22,7 +23,7 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then gn gen out/macos --args="is_debug=false target_cpu=\"x64\" rtc_include_tests=false"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ninja webrtc -C out/macos; fi
   - mkdir out/macos/release && mkdir out/macos/release/include && cp out/macos/obj/libwebrtc.a out/macos/release/ 
-  - find -name "*.h" | xargs cp --parents -t out/macos/release/include/
+  - find . -name '*.h' | xargs gcp --parents -t out/macos/release/include/
   - ls -al out/macos/release/include/
   - tar -zcvf out/macos/release/include.tar.gz out/macos/release/include/
 
