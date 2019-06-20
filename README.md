@@ -1,5 +1,8 @@
 # webrtc-build
-webrtc ci build for windows/mac/linux
+webrtc ci build for mac/linux/android/ios
 
 
-only support macos for now.
+call for help for windows support 
+
+
+
