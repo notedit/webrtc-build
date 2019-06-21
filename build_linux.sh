@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
+set -e
 
 USER_WEBRTC_URL="https://github.com/notedit/webrtc-clone.git"
 git clone $USER_WEBRTC_URL src

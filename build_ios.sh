@@ -1,6 +1,9 @@
 #!/bin/bash
 
 
+set -e
+
+
 
 USER_WEBRTC_URL="https://github.com/notedit/webrtc-clone.git"
 git clone $USER_WEBRTC_URL src
@@ -36,14 +39,14 @@ tar -zcvf $SRC_DIR/release/ios.tar.gz   ./ios_libs/WebRTC.framework
 
 
  if [ "$RELEASE_TO_GITHUB" == "yes" ]; then 
-    git clone https://github.com/notedit/webrtc-mac-framework.git
-    cp $SRC_DIR/release/ios.tar.gz   ./webrtc-mac-framework/ios/
-    cd ./webrtc-mac-framework
+    git clone https://github.com/notedit/webrtc-build-release.git
+    cp $SRC_DIR/release/ios.tar.gz   ./webrtc-build-release/ios/
+    cd ./webrtc-build-release
     git add ios/ios.tar.gz 
     git commit -a -m "release ios"
-    git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-mac-framework.git > /dev/null 2>&1
+    git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git > /dev/null 2>&1
     git remote -v
-    git push https://${GH_TOKEN}@github.com/notedit/webrtc-mac-framework.git master > /dev/null 2>&1
+    git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
  fi
 
 
