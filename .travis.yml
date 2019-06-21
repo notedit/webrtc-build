@@ -19,15 +19,15 @@ matrix:
   - os: osx
     osx_image: xcode10.1
     env: TARGET_OS=ios
-  # - os: osx
-  #   osx_image: xcode10.1
-  #   env: TARGET_OS=osx
-  # - os: linux
-  #   dist: xenial
-  #   env: TARGET_OS=android
-  # - os: linux
-  #   dist: xenial
-  #   env: TARGET_OS=linux
+  - os: osx
+    osx_image: xcode10.1
+    env: TARGET_OS=osx
+  - os: linux
+    dist: xenial
+    env: TARGET_OS=android
+  - os: linux
+    dist: xenial
+    env: TARGET_OS=linux
 
 
 
