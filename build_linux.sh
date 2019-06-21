@@ -29,3 +29,9 @@ gn gen $LINUX_OUT_DIR --args='is_debug=false target_os="android" target_cpu="x64
 
 ninja -C $LINUX_OUT_DIR
 
+
+
+
+ls -al  $LINUX_OUT_DIR/
+ls -al 
+

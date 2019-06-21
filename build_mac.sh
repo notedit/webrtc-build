@@ -32,10 +32,22 @@ cd $SRC_DIR
 # build mac 
 python tools_webrtc/ios/build_mac_libs.py $MAC_PYTHON_ARGS
 
-tar -zcvf $SRC_DIR/release/macos.tar.gz   ./mac_libs/WebRTC.framework
+tar -zcvf $SRC_DIR/release/WebRTC.framework.tar.gz   ./mac_libs/WebRTC.framework
 
 
 
+ if [ "$RELEASE_TO_GITHUB" == "yes" ]; then 
+    git clone https://github.com/notedit/webrtc-build-release.git
+    cp $SRC_DIR/release/WebRTC.framework.tar.gz  ./webrtc-build-release/mac/
+    cd ./webrtc-build-release
+    git lfs track mac/WebRTC.framework.tar.gz
+    git add mac/WebRTC.framework.tar.gz
+    git add .gitattributes
+    git commit -a -m "release ios"
+    git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git > /dev/null 2>&1
+    git remote -v
+    git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
+ fi
 
 
 

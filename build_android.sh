@@ -36,3 +36,7 @@ python tools_webrtc/android/build_aar.py $ANDROID_PYTHON_ARGS
 
 
 #tar -zcvf $SRC_DIR/release/android.tar.gz   ./android_libs/
+
+
+ls -al  ./android_libs/
+ls -al 
