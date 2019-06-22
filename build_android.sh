@@ -4,7 +4,6 @@
 # exit if there is an error 
 set -e 
 
-
 USER_WEBRTC_URL="https://github.com/notedit/webrtc-clone.git"
 git clone $USER_WEBRTC_URL src
 # disable tests file download
@@ -28,6 +27,9 @@ cp $ROOT_DIR/build_aar.py $SRC_DIR/tools_webrtc/android/
 cd $SRC_DIR
 
 
+
+set +e 
+
 # remove git-svn install, this will have an error 
 sed -i '/git-svn/d' build/install-build-deps.sh 
 
@@ -35,6 +37,8 @@ bash build/install-build-deps-android.sh
 
 source build/android/envsetup.sh 
 
+
+set -e 
 
 # build ios
 python tools_webrtc/android/build_aar.py $ANDROID_PYTHON_ARGS
