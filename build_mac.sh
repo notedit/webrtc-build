@@ -38,7 +38,7 @@ tar -zcvf $SRC_DIR/release/WebRTC.framework.tar.gz   ./mac_libs/WebRTC.framework
 
  if [ "$RELEASE_TO_GITHUB" == "yes" ]; then 
     git clone https://github.com/notedit/webrtc-build-release.git
-    cp $SRC_DIR/release/WebRTC.framework.tar.gz  ./webrtc-build-release/mac/
+    cp $SRC_DIR/release/WebRTC.framework.tar.gz  ./webrtc-build-release/osx/
     cd ./webrtc-build-release
     git lfs track mac/WebRTC.framework.tar.gz
     git add mac/WebRTC.framework.tar.gz

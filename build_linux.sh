@@ -24,14 +24,6 @@ mkdir $SRC_DIR/release
 cd $SRC_DIR
 
 
-
-set +e 
-
-bash build/install-build-deps.sh 
-
-
-set -e
-
 gn gen $LINUX_OUT_DIR --args='is_debug=false target_os="android" target_cpu="x64" rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false'
 
 

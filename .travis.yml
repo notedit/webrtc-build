@@ -8,7 +8,7 @@ language: cpp
 
 env:
   global:
-  - RELEASE_TO_GITHUB="yes"
+  - RELEASE_TO_GITHUB="no"
 
 
 
