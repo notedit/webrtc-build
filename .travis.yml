@@ -36,13 +36,14 @@ before_install:
   - export PATH=$PATH:$(pwd)/depot_tools/
   - export SRC_DIR=$(pwd)/src
   - export ROOT_DIR=$(pwd)
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install git-lfs; fi
 
 
 install:
   - if [ "$TARGET_OS" == "ios" ]; then bash build_ios.sh; fi 
   - if [ "$TARGET_OS" == "osx" ]; then bash build_mac.sh; fi
   - if [ "$TARGET_OS" == "android" ]; then bash build_android.sh; fi
-  - if [ "$TARGET_OS" == "linux" ]; then bash build_android.sh; fi
+  - if [ "$TARGET_OS" == "linux" ]; then bash build_linux.sh; fi
   
 
 script:
