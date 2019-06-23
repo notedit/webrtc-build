@@ -52,7 +52,7 @@ ninja -C $LINUX_OUT_DIR
     git commit -a -m "release linux"
     git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git > /dev/null 2>&1
     git remote -v
-    git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
+    git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master
  fi
 
 

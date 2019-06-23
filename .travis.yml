@@ -38,8 +38,9 @@ matrix:
 
 before_install:
   - source build_env.sh
-  - git config user.email notedit@gmail.com
-  - git config user.name  notedit
+  - git config --global user.email notedit@gmail.com
+  - git config --global user.name  notedit
+  - git config --global user.useConfigOnly true
   - git config branch.autosetupmerge always && git config branch.autosetuprebase always
   - export PATH=$PATH:$(pwd)/depot_tools/
   - export SRC_DIR=$(pwd)/src
