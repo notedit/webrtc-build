@@ -14,6 +14,12 @@ gclient sync
 
 
 
+set +e 
+
+bash build/install-build-deps-android.sh 
+
+set -e 
+
 LINUX_OUT_DIR="$SRC_DIR/linux_libs"
 
 mkdir $LINUX_OUT_DIR 
