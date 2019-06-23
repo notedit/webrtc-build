@@ -16,7 +16,7 @@ gclient sync
 
 set +e 
 
-bash build/install-build-deps-android.sh 
+bash build/install-build-deps.sh 
 
 set -e 
 
