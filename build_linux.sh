@@ -3,6 +3,12 @@
 
 set -e
 
+
+if [ "$BUILD_LINUX" != "yes" ]; then 
+   exit 0
+fi
+
+
 USER_WEBRTC_URL="https://github.com/notedit/webrtc-clone.git"
 git clone $USER_WEBRTC_URL src
 # disable tests file download
@@ -19,6 +25,8 @@ set +e
 bash build/install-build-deps.sh 
 
 set -e 
+
+
 
 LINUX_OUT_DIR="$SRC_DIR/linux_libs"
 
@@ -40,4 +48,11 @@ ninja -C $LINUX_OUT_DIR
 
 ls -al  $LINUX_OUT_DIR/
 ls -al 
+
+
+
+ if [ "$RELEASE_LINUX" == "yes" ]; then 
+    git clone https://github.com/notedit/webrtc-build-release.git
+ fi
+
 

@@ -4,6 +4,13 @@
 # exit if there is an error 
 set -e 
 
+
+
+if [ "$BUILD_ANDROID" != "yes" ]; then 
+   exit 0
+fi
+
+
 USER_WEBRTC_URL="https://github.com/notedit/webrtc-clone.git"
 git clone $USER_WEBRTC_URL src
 # disable tests file download
@@ -16,7 +23,7 @@ gclient sync
 
 
 ANDROID_OUT_DIR="$SRC_DIR/android_libs"
-ANDROID_PYTHON_ARGS="--build-dir $ANDROID_OUT_DIR --arch armeabi-v7a --extra-gn-args rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false rtc_enable_protobuf=false rtc_libvpx_build_vp9=false rtc_include_ilbc=false disable_libfuzzer=true libyuv_include_tests=false libyuv_disable_jpeg=true"
+ANDROID_PYTHON_ARGS="--build-dir $ANDROID_OUT_DIR --arch $TARGET_ARCH --extra-gn-args rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false rtc_enable_protobuf=false rtc_libvpx_build_vp9=false rtc_include_ilbc=false disable_libfuzzer=true libyuv_include_tests=false libyuv_disable_jpeg=true"
 
 mkdir $ANDROID_OUT_DIR 
 
@@ -45,8 +52,16 @@ python tools_webrtc/android/build_aar.py $ANDROID_PYTHON_ARGS
 
 
 
-#tar -zcvf $SRC_DIR/release/android.tar.gz   ./android_libs/
-
-
-ls -al  ./android_libs/armeabi-v7a/
-ls -al 
+ if [ "$RELEASE_ANDROID" == "yes" ]; then 
+    git clone https://github.com/notedit/webrtc-build-release.git
+    if [ ! -d "./webrtc-build-release/android/$TARGET_ARCH/" ]; then mkdir ./webrtc-build-release/android/$TARGET_ARCH/ fi
+    cp $SRC_DIR/libwebrtc.aar  ./webrtc-build-release/android/$TARGET_ARCH/
+    cd ./webrtc-build-release
+    git lfs track android/$TARGET_ARCH/libwebrtc.aar
+    git add android/$TARGET_ARCH/libwebrtc.aar
+    git add .gitattributes
+    git commit -a -m "release android"
+    git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git > /dev/null 2>&1
+    git remote -v
+    git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
+ fi

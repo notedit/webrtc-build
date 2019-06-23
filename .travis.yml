@@ -6,14 +6,6 @@ language: cpp
 
 
 
-env:
-  global:
-  - RELEASE_TO_GITHUB="no"
-
-
-
-
-
 matrix:
   include:
   - os: osx
@@ -24,14 +16,30 @@ matrix:
     env: TARGET_OS=osx
   - os: linux
     dist: xenial
-    env: TARGET_OS=android
+    env: TARGET_OS=linux
   - os: linux
     dist: xenial
-    env: TARGET_OS=linux
+    env: 
+    - TARGET_OS=android
+    - TARGET_ARCH=armeabi-v7a
+  - os: linux
+    dist: xenial
+    env: 
+    - TARGET_OS=android
+    - TARGET_ARCH=arm64-v8a
+  - os: linux
+    dist: xenial
+    env: 
+    - TARGET_OS=android
+    - TARGET_ARCH=x86
+
 
 
 
 before_install:
+  - source build_env.sh
+  - git config user.email notedit@gmail.com
+  - git config user.name  notedit
   - git config branch.autosetupmerge always && git config branch.autosetuprebase always
   - export PATH=$PATH:$(pwd)/depot_tools/
   - export SRC_DIR=$(pwd)/src
@@ -47,6 +55,6 @@ install:
   
 
 script:
-  - echo "webrtc"
+  - echo "webrtc build "
 
 

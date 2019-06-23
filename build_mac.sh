@@ -4,6 +4,13 @@
 set -e
 
 
+
+
+if [ "$BUILD_OSX" != "yes" ]; then 
+   exit 0
+fi
+
+
 USER_WEBRTC_URL="https://github.com/notedit/webrtc-clone.git"
 git clone $USER_WEBRTC_URL src
 # disable tests file download
@@ -36,14 +43,14 @@ tar -zcvf $SRC_DIR/release/WebRTC.framework.tar.gz   ./mac_libs/WebRTC.framework
 
 
 
- if [ "$RELEASE_TO_GITHUB" == "yes" ]; then 
+ if [ "$RELEASE_OSX" == "yes" ]; then 
     git clone https://github.com/notedit/webrtc-build-release.git
     cp $SRC_DIR/release/WebRTC.framework.tar.gz  ./webrtc-build-release/osx/
     cd ./webrtc-build-release
     git lfs track mac/WebRTC.framework.tar.gz
     git add mac/WebRTC.framework.tar.gz
     git add .gitattributes
-    git commit -a -m "release ios"
+    git commit -a -m "release osx"
     git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git > /dev/null 2>&1
     git remote -v
     git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
