@@ -33,12 +33,12 @@ cp $ROOT_DIR/build_aar.py $SRC_DIR/tools_webrtc/android/
 
 cd $SRC_DIR
 
+# remove git-svn install, this will have an error 
+sed -i '/git-svn/d' build/install-build-deps.sh 
+
 
 
 set +e 
-
-# remove git-svn install, this will have an error 
-sed -i '/git-svn/d' build/install-build-deps.sh 
 
 bash build/install-build-deps-android.sh 
 
