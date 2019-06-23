@@ -30,7 +30,7 @@ mkdir $SRC_DIR/release
 cd $SRC_DIR
 
 
-gn gen $LINUX_OUT_DIR --args='is_debug=false target_os="android" target_cpu="x64" rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false'
+gn gen $LINUX_OUT_DIR --args='is_debug=false target_cpu="x64" rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false'
 
 
 ninja -C $LINUX_OUT_DIR
