@@ -42,15 +42,17 @@ gn gen $LINUX_OUT_DIR --args='is_debug=false target_cpu="x64" rtc_include_tests=
 ninja -C $LINUX_OUT_DIR
 
 
-
-
-ls -al  $LINUX_OUT_DIR/
-ls -al 
-
-
-
  if [ "$RELEASE_LINUX" == "yes" ]; then 
     git clone https://github.com/notedit/webrtc-build-release.git
+    cp $LINUX_OUT_DIR/obj/libwebrtc.a  ./webrtc-build-release/linux/
+    cd ./webrtc-build-release
+    git lfs track linux/libwebrtc.a 
+    git add linux/libwebrtc.a 
+    git add .gitattributes
+    git commit -a -m "release linux"
+    git remote set-url origin https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git > /dev/null 2>&1
+    git remote -v
+    git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
  fi
 
 

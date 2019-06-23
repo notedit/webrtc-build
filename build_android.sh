@@ -54,7 +54,7 @@ python tools_webrtc/android/build_aar.py $ANDROID_PYTHON_ARGS
 
  if [ "$RELEASE_ANDROID" == "yes" ]; then 
     git clone https://github.com/notedit/webrtc-build-release.git
-    if [ ! -d "./webrtc-build-release/android/$TARGET_ARCH/" ]; then mkdir ./webrtc-build-release/android/$TARGET_ARCH/ fi
+    mkdir -p ./webrtc-build-release/android/$TARGET_ARCH/
     cp $SRC_DIR/libwebrtc.aar  ./webrtc-build-release/android/$TARGET_ARCH/
     cd ./webrtc-build-release
     git lfs track android/$TARGET_ARCH/libwebrtc.aar

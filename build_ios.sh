@@ -46,7 +46,6 @@ tar -zcvf $SRC_DIR/release/WebRTC.framework.tar.gz   ./ios_libs/WebRTC.framework
 
  if [ "$RELEASE_IOS" == "yes" ]; then 
     git clone https://github.com/notedit/webrtc-build-release.git
-    if [ ! -d "./webrtc-build-release/ios/" ]; then mkdir ./webrtc-build-release/ios/ fi
     cp $SRC_DIR/release/WebRTC.framework.tar.gz  ./webrtc-build-release/ios/
     cd ./webrtc-build-release
     git lfs track ios/WebRTC.framework.tar.gz
@@ -57,16 +56,4 @@ tar -zcvf $SRC_DIR/release/WebRTC.framework.tar.gz   ./ios_libs/WebRTC.framework
     git remote -v
     git push https://${GH_TOKEN}@github.com/notedit/webrtc-build-release.git master > /dev/null 2>&1
  fi
-
-
-
-
-
-
-
-
-
-
-
-
 
