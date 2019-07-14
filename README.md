@@ -9,7 +9,7 @@ webrtc ci build for mac/linux/android/ios
 
 This build script fetch webrtc source from  https://github.com/notedit/webrtc-clone
 
-the latest build version is m75
+the latest build version is m76, other versions see the breanchs.
 
 
 
